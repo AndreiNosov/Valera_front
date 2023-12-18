@@ -7,3 +7,15 @@
     --text-color-dark-grey: #646464;
     --box-shadow-color: #00000019
 }
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}

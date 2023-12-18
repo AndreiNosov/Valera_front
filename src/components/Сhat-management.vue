@@ -2,18 +2,39 @@
   <div class="container">
     <img :src="ava" alt="аватарка">
     <div class="buttons">
-      <button class="button" v-for="({title, content}, index) in buttons" :key="index">{{ title }}</button>
+      <div>
+        <input class="hide" type="file" ref="fileInput" @change="handleFileChange" />
+        <button class="button file-input" @click="uploadFile">Загрузить файл</button>
+      </div>
+      <button class="button" @click="clearMessages">Очистить</button>
+      <list-of-skills />
     </div>
   </div>
 </template>
 
 <script setup>
 import ava from "@/assets/ava.jpg"
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { computed } from "vue"
+import { useStore } from "vuex"
+import { ref } from 'vue'
+import ListOfSkills from "@/components/List-of-skills.vue"
 
-const store = useStore();
-const buttons = computed(() => store.getters.getManagementButtons);
+const store = useStore()
+const buttons = computed(() => store.getters.getManagementButtons)
+
+function clearMessages() {
+  store.commit("clearMessages")
+}
+const fileInput = ref(null)
+
+const handleFileChange = () => {
+  const files = fileInput.value.files
+  store.commit('sendAFile', files)
+};
+
+const uploadFile = () => {
+  fileInput.value.click()
+};
 </script>
 
 <style scoped lang="scss">
@@ -33,6 +54,10 @@ const buttons = computed(() => store.getters.getManagementButtons);
     border-radius: 50%;
     border: 4px solid var(--main-color);
     box-shadow: 0 4px 6px var(--box-shadow-color);
+  }
+
+  .file-input {
+    width: 100%;
   }
 
   .buttons {

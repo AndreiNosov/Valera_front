@@ -87,31 +87,35 @@ const store = createStore({
         ],
         managementButtons: [
             {
-                title: "button 1",
-                content: {}
+                title: "Навык 1",
+                status: true
             },
             {
-                title: "button 2",
-                content: {}
+                title: "Навык 2",
+                status: false
             },
             {
-                title: "button 3",
-                content: {}
+                title: "Навык 3",
+                status: false
             },
-            {
-                title: "button 4",
-                content: {}
-            }
-        ]
+        ],
+        fileFromTheUser: []
     },
+
     getters: {
         getMessages(state) {
             return state.messages
         },
+
         getManagementButtons(state) {
             return state.managementButtons
+        },
+
+        getStatusSwitch(state, index) {
+            return state.managementButtons[index].status
         }
     },
+
     mutations: {
         addMessages(state, message) {
             state.messages.unshift(message)
@@ -119,8 +123,17 @@ const store = createStore({
 
         clearMessages(state) {
             state.messages = []
+        },
+
+        sendAFile(state, files) {
+            state.fileFromTheUser.push(files);
+        },
+
+        statusSwitch(state, index) {
+            state.managementButtons[index].status = !state.managementButtons[index].status
         }
     },
+
     actions: {
 
     }

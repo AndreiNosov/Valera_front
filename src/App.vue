@@ -2,7 +2,7 @@
   <div class="main-page">
     <div class="left-column">
       <chat-management />
-      <button class="button" @click="store.commit('clearMessages')">Выключить навык</button>
+      <button class="button">Выключить навык</button>
     </div>
     <div class="right-column">
       <chat-messages />
@@ -13,10 +13,9 @@
 
 <script setup>
 import "@/styles/index.css"
-import ChatInput from "@/components/Chat-input.vue";
+import ChatInput from "@/components/Chat-input.vue"
 import ChatManagement from "@/components/Сhat-management.vue"
 import ChatMessages from "@/components/Сhat-messages.vue"
-import store from "@/store/index.js";
 </script>
 
 <style lang="scss" scoped>
