@@ -5,7 +5,9 @@
     --text-color-white: white;
     --text-color-black: black;
     --text-color-dark-grey: #646464;
-    --box-shadow-color: #00000019
+    --box-shadow-color: #00000019;
+    --background-hover: #eaeaea;
+    --transparent-black-background: #0000007F
 }
 
 * {

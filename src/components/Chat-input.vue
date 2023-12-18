@@ -4,6 +4,7 @@
     <button class="input-push" @click="pushMessage">
       <svg-icon class="mdi" type="mdi" :path="mdiArrowRightCircle"></svg-icon>
     </button>
+    <voice-recording />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import { ref, onMounted } from "vue";
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiArrowRightCircle } from '@mdi/js';
 import store from "@/store/index.js";
+import VoiceRecording from "@/components/Voice-recording.vue";
 
 const placeholder = ref('Введите вопрос')
 const textInput = ref("")

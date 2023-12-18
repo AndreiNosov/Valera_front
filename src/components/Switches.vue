@@ -2,11 +2,11 @@
   <div class="switch">
     <label class="switch-label">
       <input
-          :checked="modelValue"
-          type="checkbox"
-          class="switch-input"
-          :value="modelValue"
-          @input="updateModelValue"
+        :checked="modelValue"
+        type="checkbox"
+        class="switch-input"
+        :value="modelValue"
+        @input="updateModelValue"
       />
       <span class="switch-slider"></span>
     </label>

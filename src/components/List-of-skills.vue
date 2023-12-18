@@ -65,10 +65,11 @@ function handleStatusSwitch(index) {
   width: 100vw; /* Занимает 100% ширины экрана */
   height: 100vh; /* Занимает 100% высоты экрана */
   background-color: rgba(0, 0, 0, 0.5); /* Прозрачный черный фон */
+  //background-color: rgba(var(--transparent-black-background)); /* Прозрачный черный фон */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1; /* Выше других элементов на странице */
+  z-index: 2; /* Выше других элементов на странице */
   backdrop-filter: blur(5px); /* Размытие фона */
 }
 
@@ -86,7 +87,7 @@ function handleStatusSwitch(index) {
     align-items: center;
 
     &:hover {
-      background: #eaeaea;
+      background: var(--background-hover);
     }
 
     .name-skill {

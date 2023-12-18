@@ -118,7 +118,16 @@ const store = createStore({
 
     mutations: {
         addMessages(state, message) {
-            state.messages.unshift(message)
+            if (message.content) {
+                if (message.content.text) {
+                    // Если контент содержит текст, добавляем его к текстовому сообщению
+                    state.messages.unshift(message);
+                }
+                else if (message.content.audio) {
+                    // Если контент содержит аудио, добавляем его к аудиосообщению
+                    state.messages.unshift(message);
+                }
+            }
         },
 
         clearMessages(state) {

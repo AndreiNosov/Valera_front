@@ -14,13 +14,11 @@
 
 <script setup>
 import ava from "@/assets/ava.jpg"
-import { computed } from "vue"
 import { useStore } from "vuex"
 import { ref } from 'vue'
 import ListOfSkills from "@/components/List-of-skills.vue"
 
 const store = useStore()
-const buttons = computed(() => store.getters.getManagementButtons)
 
 function clearMessages() {
   store.commit("clearMessages")
