@@ -98,8 +98,7 @@ const store = createStore({
                 title: "Навык 3",
                 status: false
             },
-        ],
-        fileFromTheUser: []
+        ]
     },
 
     getters: {
@@ -123,10 +122,6 @@ const store = createStore({
 
         clearMessages(state) {
             state.messages = []
-        },
-
-        sendAFile(state, files) {
-            state.fileFromTheUser.push(files);
         },
 
         statusSwitch(state, index) {

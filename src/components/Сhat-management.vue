@@ -26,8 +26,30 @@ function clearMessages() {
 const fileInput = ref(null)
 
 const handleFileChange = () => {
-  const files = fileInput.value.files
-  store.commit('sendAFile', files)
+  const file = fileInput.value.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const fileContent = event.target.result;
+
+      const fileMessage = {
+        author: 'user',
+        content: {
+          file: {
+            name: file.name,
+            size: file.size,
+            content: fileContent,
+          },
+        },
+      };
+
+      store.commit('addMessages', fileMessage);
+    };
+
+    reader.readAsDataURL(file); // Read the file as data URL
+  }
 };
 
 const uploadFile = () => {
