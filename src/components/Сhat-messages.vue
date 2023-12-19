@@ -10,7 +10,7 @@
       >
         <div v-if="message.content.text" class="message-text">{{ message.content.text }}</div>
         <div v-if="message.content.audio" class="message-audio">
-          <audio :src="message.content.audio" controls></audio>
+          <audio class="audio" :src="message.content.audio" controls></audio>
         </div>
         <button
             v-if="message.author === 'bot' && message.content.button"
@@ -80,6 +80,21 @@ const messages = computed(() => store.getters.getMessages);
       padding: 16px;
       border-radius: 16px;
       box-shadow: 0 4px 6px var(--box-shadow-color);
+
+      .message-audio {
+        height: 50px; // Задайте конкретную высоту или корректируйте по необходимости
+        width: 100%;  // Задайте конкретную ширину или корректируйте по необходимости
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .audio {
+          width: 100%;  // Аудио-элемент займет всю доступную ширину
+          height: 100%; // Аудио-элемент займет всю доступную высоту
+        }
+      }
+
+
 
       &-user {
         margin-left: auto;

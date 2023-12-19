@@ -1,4 +1,4 @@
-import { createStore } from 'vuex';
+import {createStore} from 'vuex';
 
 const store = createStore({
     state: {
@@ -118,16 +118,7 @@ const store = createStore({
 
     mutations: {
         addMessages(state, message) {
-            if (message.content) {
-                if (message.content.text) {
-                    // Если контент содержит текст, добавляем его к текстовому сообщению
-                    state.messages.unshift(message);
-                }
-                else if (message.content.audio) {
-                    // Если контент содержит аудио, добавляем его к аудиосообщению
-                    state.messages.unshift(message);
-                }
-            }
+            state.messages.unshift(message);
         },
 
         clearMessages(state) {
@@ -143,9 +134,7 @@ const store = createStore({
         }
     },
 
-    actions: {
-
-    }
+    actions: {}
 });
 
 export default store;

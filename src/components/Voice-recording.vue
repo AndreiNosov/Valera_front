@@ -1,43 +1,56 @@
 <template>
-  <div>
-    <button @click="toggleRecording">{{ recording ? 'Stop Recording' : 'Start Recording' }}</button>
-  </div>
+  <button @click="toggleRecording">
+    <SvgIcon class="mdi" type="mdi" :path="mdiMicrophone"></SvgIcon>
+  </button>
 </template>
 
 <script>
 import { ref, onUnmounted } from 'vue';
+import { useStore } from 'vuex';
+
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiMicrophone } from '@mdi/js';
 
 export default {
-  name: 'VoiceRecorder',
+  components: {
+    SvgIcon,
+  },
   setup() {
-    const recording = ref(false);  // Переменная для отслеживания состояния записи
-    const audioChunks = ref([]);   // Массив для хранения частей аудио
-
-    let mediaRecorder;  // Объект MediaRecorder для записи аудио
-    let audioStream;    // Объект для отслеживания аудиопотока
+    const store = useStore();
+    const recording = ref(false);
+    const audioChunks = ref([]);
+    let mediaRecorder;
+    let audioStream;
 
     const startRecording = async () => {
       try {
         audioChunks.value = [];
-        audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioStream = await navigator.mediaDevices.getUserMedia({audio: true});
         mediaRecorder = new MediaRecorder(audioStream);
 
-        // Обработчик события при получении данных аудио
         mediaRecorder.ondataavailable = (e) => {
           if (e.data.size > 0) {
             audioChunks.value.push(e.data);
           }
         };
 
-        // Обработчик события при завершении записи
         mediaRecorder.onstop = () => {
-          const audioBlob = new Blob(audioChunks.value, { type: 'audio/wav' });
+          const audioBlob = new Blob(audioChunks.value, {type: 'audio/wav'});
           const audioUrl = URL.createObjectURL(audioBlob);
-          console.log('Recording complete:', audioUrl);
+
+          const audioMessage = {
+            author: 'user',
+            content: {
+              audio: audioUrl,
+            },
+          };
+
+          // Вызываем мутацию для добавления аудиосообщения в массив messages
+          store.commit('addMessages', audioMessage);
         };
 
-        mediaRecorder.start();  // Начать запись
-        recording.value = true; // Установить флаг записи в true
+        mediaRecorder.start();
+        recording.value = true;
       } catch (error) {
         console.error('Error accessing microphone:', error);
       }
@@ -47,20 +60,6 @@ export default {
       if (mediaRecorder && recording.value) {
         mediaRecorder.stop();
         audioStream.getTracks().forEach((track) => track.stop());
-
-        const audioBlob = new Blob(audioChunks.value, { type: 'audio/wav' });
-        const audioUrl = URL.createObjectURL(audioBlob);
-
-        const audioMessage = {
-          author: 'user',
-          content: {
-            audio: audioUrl,
-          },
-        };
-
-        // Вызываем мутацию для добавления аудиосообщения в массив messages
-        store.commit('addMessages', audioMessage);
-
         recording.value = false;
       }
     };
@@ -74,17 +73,37 @@ export default {
     };
 
     onUnmounted(() => {
-      stopRecording();  // Вызывается при удалении компонента (чтобы избежать утечек ресурсов)
+      stopRecording();
     });
 
     return {
       recording,
       toggleRecording,
+      mdiMicrophone,
     };
   },
 };
 </script>
 
-<style scoped>
-/* Your component styles here */
+<style scoped lang="scss">
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  width: 24px; /* увеличил ширину кнопки */
+  height: 24px; /* увеличил высоту кнопки */
+  background: var(--text-color-dark-grey);
+  border: 0;
+  border-radius: 50%;
+  color: var(--background-color);
+}
+
+.mdi {
+  width: 20px !important; /* увеличил ширину иконки */
+  height: 20px !important; /* увеличил высоту иконки */
+  font-size: 20px; /* увеличил размер иконки */
+}
 </style>
+
+
