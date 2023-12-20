@@ -2,89 +2,7 @@ import {createStore} from 'vuex';
 
 const store = createStore({
     state: {
-        messages: [
-            {
-                author: "bot",
-                content: {
-                    text: "bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot ",
-                }
-            },
-            {
-                author: "user",
-                content: {
-                    text:
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user "
-                }
-            },
-            {
-                author: "bot",
-                content: {
-                    text: "bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot ",
-                }
-            },
-            {
-                author: "user",
-                content: {
-                    text:
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user "
-                }
-            },
-            {
-                author: "bot",
-                content: {
-                    text: "bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot ",
-                }
-            },
-            {
-                author: "user",
-                content: {
-                    text:
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user "
-                }
-            },
-            {
-                author: "bot",
-                content: {
-                    text: "bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot ",
-                }
-            },
-            {
-                author: "user",
-                content: {
-                    text:
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user " +
-                        "user user user user user user user user user user user user user user user user user user user user user "
-                }
-            },
-            {
-                author: "bot",
-                content: {
-                    text: "bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot ",
-                    button: "загрузить файл"
-                }
-            },
-            {
-                author: "user",
-                content: {
-                    text: "user user user user user user user user user user user user user user user user user user user user user "
-                }
-            },
-        ],
+        messages: [],
 
         managementButtons: [
             {
@@ -104,7 +22,7 @@ const store = createStore({
 
     getters: {
         getMessages(state) {
-            return state.messages.reverse()
+            return state.messages
         },
 
         getManagementButtons(state) {
