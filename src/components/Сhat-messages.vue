@@ -20,6 +20,7 @@ import OCRVLogo from "@/assets/OCRV-Logo.svg"
 const store = useStore();
 const messages = computed(() => store.getters.getMessages);
 </script>
+
 <style scoped lang="scss">
 .wrapper {
   position: relative;

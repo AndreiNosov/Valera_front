@@ -104,7 +104,7 @@ const store = createStore({
 
     getters: {
         getMessages(state) {
-            return state.messages
+            return state.messages.reverse()
         },
 
         getManagementButtons(state) {
@@ -118,7 +118,7 @@ const store = createStore({
 
     mutations: {
         addMessages(state, message) {
-            state.messages.unshift(message);
+            state.messages.push(message);
         },
 
         clearMessages(state) {
