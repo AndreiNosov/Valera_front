@@ -22,7 +22,12 @@ import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiFile } from '@mdi/js';
 import { defineProps, ref, onMounted, watch } from "vue";
 
-const props = defineProps(["content"]);
+const props = defineProps({
+  content: {
+    type: Object
+  }
+})
+
 const content = ref(props.content);
 const downloadLink = ref(null);
 

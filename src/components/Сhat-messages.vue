@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-    <img class="logo" :src="ocrvLogo" alt="Логотип компании ОЦРВ">
+    <img class="logo" :src="OCRVLogo" alt="Логотип компании ОЦРВ">
     <div class="container">
-      <div class="message" v-for="({ author, content}, index) in messages" :key="index">
+      <div class="message" v-for="({ author, content }, index) in messages" :key="index">
         <user-message v-if="author === 'user'" :content="content" />
         <bot-message v-if="author === 'bot'" :content="content" />
       </div>
@@ -15,7 +15,7 @@ import UserMessage from "@/components/User-message.vue";
 import BotMessage from "@/components/Bot-message.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
-import ocrvLogo from "@/assets/OCRV-Logo.svg"
+import OCRVLogo from "@/assets/OCRV-Logo.svg"
 
 const store = useStore();
 const messages = computed(() => store.getters.getMessages);

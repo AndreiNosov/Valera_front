@@ -3,19 +3,19 @@
     <img :src="ava" alt="аватарка">
     <div class="buttons">
       <div>
-        <input class="hide" type="file" ref="fileInput" @change="handleFileChange" />
+        <input class="hide" type="file" ref="fileInput" @change="handleFileChange"/>
         <button class="button file-input" @click="uploadFile">Загрузить файл</button>
       </div>
       <button class="button" @click="clearMessages">Очистить</button>
-      <list-of-skills />
+      <list-of-skills/>
     </div>
   </div>
 </template>
 
 <script setup>
 import ava from "@/assets/ava.jpg"
-import { useStore } from "vuex"
-import { ref } from 'vue'
+import {useStore} from "vuex"
+import {ref} from 'vue'
 import ListOfSkills from "@/components/List-of-skills.vue"
 
 const store = useStore()
@@ -23,6 +23,7 @@ const store = useStore()
 function clearMessages() {
   store.commit("clearMessages")
 }
+
 const fileInput = ref(null)
 
 const handleFileChange = () => {

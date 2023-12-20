@@ -85,6 +85,7 @@ const store = createStore({
                 }
             },
         ],
+
         managementButtons: [
             {
                 title: "Навык 1",
