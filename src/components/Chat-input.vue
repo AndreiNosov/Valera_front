@@ -15,18 +15,21 @@ import VoiceRecording from "@/components/Voice-recording.vue";
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiArrowRightCircle } from '@mdi/js';
 
-const placeholder = ref('Введите вопрос')
-const textInput = ref("")
+const placeholder = ref('Введите вопрос');
+const textInput = ref("");
 const isInputFocused = ref(false);
 
 function pushMessage() {
   if (textInput.value.length !== 0) {
-    store.commit('addMessages', {
-      author: "user",
+    // Отправляем сообщение на бекенд
+    // store.dispatch('sendMessageToBackend');
+    const message = {
+      author: 'user',
       content: {
-        text: textInput.value
-      }
-    })
+        text: textInput.value,
+      },
+    }
+    store.commit('addMessages', message);
     textInput.value = "";
   }
 }
@@ -43,6 +46,7 @@ onMounted(() => {
   focusInput();
 });
 </script>
+
 
 <style scoped lang="scss">
 .container {

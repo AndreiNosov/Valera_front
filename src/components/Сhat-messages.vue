@@ -2,7 +2,7 @@
   <div class="wrapper">
     <img class="logo" :src="OCRVLogo" alt="Логотип компании ОЦРВ">
     <div class="container">
-      <div class="message" v-for="({ author, content }, index) in messages" :key="index">
+      <div class="message" v-for="({ author, content }, index) in [...messages].reverse()" :key="index">
         <user-message v-if="author === 'user'" :content="content" />
         <bot-message v-if="author === 'bot'" :content="content" />
       </div>
