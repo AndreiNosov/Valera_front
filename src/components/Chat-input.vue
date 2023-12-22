@@ -22,14 +22,12 @@ const isInputFocused = ref(false);
 function pushMessage() {
   if (textInput.value.length !== 0) {
     // Отправляем сообщение на бекенд
-    // store.dispatch('sendMessageToBackend');
-    const message = {
-      author: 'user',
+    store.dispatch('sendMessageToBackend', {
+      author: "user",
       content: {
-        text: textInput.value,
-      },
-    }
-    store.commit('addMessages', message);
+        text: textInput.value
+      }
+    });
     textInput.value = "";
   }
 }
