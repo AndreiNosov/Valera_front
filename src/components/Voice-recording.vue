@@ -10,6 +10,7 @@ import { useStore } from 'vuex';
 
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiMicrophone } from '@mdi/js';
+import store from "@/store/index.js";
 
 export default {
   components: {
@@ -38,16 +39,9 @@ export default {
           const audioBlob = new Blob(audioChunks.value, {type: 'audio/wav'});
           const audioUrl = URL.createObjectURL(audioBlob);
 
-          const audioMessage = {
-            author: 'user',
-            content: {
-              audio: audioUrl,
-            },
-          };
-
-          // Вызываем мутацию для добавления аудиосообщения в массив messages
-          store.commit('addMessages', audioMessage);
-        };
+          store.dispatch('sendAMessageVoice', audioUrl)
+          store.dispatch('chatHistory');
+        }
 
         mediaRecorder.start();
         recording.value = true;

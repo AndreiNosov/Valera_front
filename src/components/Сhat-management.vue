@@ -21,7 +21,7 @@ import ListOfSkills from "@/components/List-of-skills.vue"
 const store = useStore()
 
 function clearMessages() {
-  store.commit("clearMessages")
+  store.commit("clearMessage")
 }
 
 const fileInput = ref(null)
@@ -35,18 +35,14 @@ const handleFileChange = () => {
     reader.onload = (event) => {
       const fileContent = event.target.result;
 
-      const fileMessage = {
-        author: 'user',
-        content: {
-          file: {
-            name: file.name,
-            size: file.size,
-            content: fileContent,
-          },
-        },
-      };
+      const fileInput = {
+        name: file.name,
+        size: file.size,
+        content: fileContent,
+      }
 
-      store.commit('addMessages', fileMessage);
+      store.dispatch('sendAMessageFile', fileInput)
+      store.dispatch('chatHistory');
     };
 
     reader.readAsDataURL(file); // Read the file as data URL

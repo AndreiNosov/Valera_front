@@ -10,10 +10,10 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import store from "@/store/index.js";
-import VoiceRecording from "@/components/Voice-recording.vue";
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiArrowRightCircle } from '@mdi/js';
+import store from "@/store/index.js";
+import VoiceRecording from "@/components/Voice-recording.vue";
 
 const placeholder = ref('Введите вопрос');
 const textInput = ref("");
@@ -21,13 +21,8 @@ const isInputFocused = ref(false);
 
 function pushMessage() {
   if (textInput.value.length !== 0) {
-    // Отправляем сообщение на бекенд
-    store.dispatch('sendMessageToBackend', {
-      author: "user",
-      content: {
-        text: textInput.value
-      }
-    });
+    store.dispatch('sendAMessageText', textInput.value);
+    // store.dispatch('chatHistory');
     textInput.value = "";
   }
 }
