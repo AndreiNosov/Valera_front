@@ -1,12 +1,12 @@
 <template>
   <div class="message">
-    <div v-if="props.content.text" class="message-text">{{ content.text }}</div>
+    <div v-if="content.text" class="message-text">{{ content.text }}</div>
 
-    <div v-if="props.content.audio" class="message-audio">
+    <div v-if="content.audio" class="message-audio">
       <audio class="audio" :src="content.audio" controls></audio>
     </div>
 
-    <div v-if="props.content.file" class="message-file">
+    <div v-if="content.file" class="message-file">
       <button class="message-download-button" @click.prevent="downloadFile">
         <svg-icon type="mdi" :path="mdiFile"></svg-icon>
       </button>
@@ -20,7 +20,7 @@
 <script setup>
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiFile } from '@mdi/js';
-import { defineProps, ref, onMounted, watch } from "vue";
+import { defineProps, ref } from "vue";
 
 const props = defineProps({
   content: {
@@ -47,14 +47,6 @@ const downloadFile = () => {
     link.click();
   }
 };
-
-onMounted(() => {
-  watch(() => props.content, (newContent) => {
-    content.value = newContent;
-  })
-
-  downloadLink.value = $refs.downloadLink;
-});
 </script>
 
 <style scoped lang="scss">
@@ -91,24 +83,16 @@ onMounted(() => {
     justify-content: space-between;
     align-items: center;
 
-    .download-file {
+    .message-download-button {
       margin-right: 16px;
-    }
-
-    .size-file {
-      margin-left: 16px;
-    }
-
-    button {
       width: 64px;
       height: 64px;
       border: 0;
       border-radius: 50%;
-      margin: 0 !important;
     }
 
-    .message-download-button {
-      margin-bottom: 8px;
+    .size-file {
+      margin-left: 16px;
     }
   }
 }

@@ -3,20 +3,8 @@ import axios from 'axios';
 
 const store = createStore({
     state: {
-        messages: [
-            {
-                author: 'user',
-                content: {
-                    text: 'user user user user user user user user user user user user user user user user user user ',
-                },
-            },
-            {
-                author: 'bot',
-                content: {
-                    text: 'bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot bot ',
-                },
-            },
-        ],
+        messages: [],
+
         managementButtons: [
             {
                 title: 'Навык 1',
@@ -56,7 +44,7 @@ const store = createStore({
             state.messages = messages;
         },
 
-        clearMessages(state) {
+        clearMessage(state) {
             state.messages = [];
         },
 
@@ -67,10 +55,8 @@ const store = createStore({
 
     actions: {
         async sendMessageToChat({ commit }, message) {
-            const backendUrl = 'http://localhost:3000/api/greet';
-
             try {
-                const response = await axios.post(backendUrl, { message });
+                const response = await axios.post('http://localhost:3000/api/greet', { message });
 
                 const userMessage = {
                     author: 'user',
@@ -82,44 +68,16 @@ const store = createStore({
                 const botMessage = {
                     author: 'bot',
                     content: {
-                        text: response.data.response,  // Используем ответ от сервера
+                        text: response.data.response,
                     },
                 };
 
-                // Добавляем сообщения в стор
                 commit('addMessage', userMessage);
                 commit('addMessage', botMessage);
             } catch (error) {
-                console.error('Ошибка при отправке запроса:', error);
+                console.error('Ошибка при отправке запроса: ', error);
             }
         },
-
-        // async sendAMessageText({ commit, state }, messageText) {
-        //     try {
-        //         // Отправляем сообщение на бекенд
-        //         const response = await axios.post('http://127.0.0.1:8000/chat', { message: messageText });
-        //
-        //         const userMessage = {
-        //             author: 'user',
-        //             content: {
-        //                 text: messageText,
-        //             },
-        //         };
-        //
-        //         const botMessage = {
-        //             author: 'bot',
-        //             content: {
-        //                 text: response.data.response,  // Используем ответ от сервера
-        //             },
-        //         };
-        //
-        //         // Добавляем сообщения в стор
-        //         commit('addMessage', userMessage);
-        //         commit('addMessage', botMessage);
-        //     } catch (error) {
-        //         console.error('Ошибка при отправке сообщения:', error);
-        //     }
-        // },
     },
 });
 

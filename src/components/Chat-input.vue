@@ -22,7 +22,6 @@ const isInputFocused = ref(false);
 function pushMessage() {
   if (textInput.value.length !== 0) {
     store.dispatch('sendMessageToChat', textInput.value);
-    // store.dispatch('chatHistory');
     textInput.value = "";
   }
 }
@@ -40,7 +39,6 @@ onMounted(() => {
 });
 </script>
 
-
 <style scoped lang="scss">
 .container {
   margin-top: 16px;
@@ -51,25 +49,25 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 4px 6px var(--box-shadow-color);
+}
 
-  .input {
-    margin-left: 4px;
-    width: 100%;
-    background: var(--background-color);
-    border: 0;
-    font-size: 16px;
+.input {
+  margin-left: 4px;
+  width: 100%;
+  background: var(--background-color);
+  border: 0;
+  font-size: 16px;
 
-    &:focus {
-      outline: none;
-    }
-
-    &-push {
-      width: 28px;
-      height: 28px;
-      background: var(--background-color);
-      border: 0;
-      color: var(--text-color-dark-grey);
-    }
+  &:focus {
+    outline: none;
   }
+}
+
+.input-push {
+  width: 28px;
+  height: 28px;
+  background: var(--background-color);
+  border: 0;
+  color: var(--text-color-dark-grey);
 }
 </style>

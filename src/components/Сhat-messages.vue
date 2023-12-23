@@ -2,9 +2,11 @@
   <div class="wrapper">
     <img class="logo" :src="OCRVLogo" alt="Логотип компании ОЦРВ">
     <div class="container">
-      <div class="message" v-for="({ author, content }, index) in messages" :key="index">
-        <user-message v-if="author === 'user'" :content="content" />
-        <bot-message v-if="author === 'bot'" :content="content" />
+      <div class="content">
+        <div class="message" v-for="({ author, content }, index) in messages" :key="index">
+          <user-message v-if="author === 'user'" :content="content" />
+          <bot-message v-if="author === 'bot'" :content="content" />
+        </div>
       </div>
     </div>
   </div>
@@ -42,13 +44,18 @@ const messages = computed(() => store.getters.getMessages);
     border-radius: 16px;
     background: var(--background-color);
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     box-shadow: 0 4px 6px var(--box-shadow-color);
     overflow: hidden;
     overflow-y: auto;
 
-    .message {
-      margin-bottom: 4px;
+    .content {
+      margin-top: auto;
+      width: auto;
+
+      .message {
+        margin-bottom: 4px;
+      }
     }
 
     &::-webkit-scrollbar {
