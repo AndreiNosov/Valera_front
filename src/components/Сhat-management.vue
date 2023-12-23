@@ -45,7 +45,7 @@ const handleFileChange = () => {
       store.dispatch('chatHistory');
     };
 
-    reader.readAsDataURL(file); // Read the file as data URL
+    reader.readAsDataURL(file);
   }
 };
 

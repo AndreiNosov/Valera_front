@@ -21,7 +21,7 @@ const isInputFocused = ref(false);
 
 function pushMessage() {
   if (textInput.value.length !== 0) {
-    store.dispatch('sendAMessageText', textInput.value);
+    store.dispatch('sendMessageToChat', textInput.value);
     // store.dispatch('chatHistory');
     textInput.value = "";
   }

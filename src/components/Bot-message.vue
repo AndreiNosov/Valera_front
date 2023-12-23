@@ -1,14 +1,13 @@
 <template>
   <div class="message">
-    <div v-if="content.text" class="message-text">{{ content.text }}</div>
-    <button v-if="content.titleButton" class="message-button"> {{ content.titleButton }} </button>
+    <div v-if="props.content.text" class="message-text">{{ content.text }}</div>
   </div>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
 
-defineProps({
+const props = defineProps({
   content: {
     type: Object
   }
