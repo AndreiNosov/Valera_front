@@ -56,12 +56,62 @@ const store = createStore({
     actions: {
         async sendMessageToChat({ commit }, message) {
             try {
-                const response = await axios.post('http://localhost:3000/api/greet', { message });
+                const response = await axios.post('http://127.0.0.1:8000/chat', { message });
 
                 const userMessage = {
                     author: 'user',
                     content: {
                         text: message,
+                    },
+                };
+
+                const botMessage = {
+                    author: 'bot',
+                    content: {
+                        text: response.data.response,
+                    },
+                };
+
+                commit('addMessage', userMessage);
+                commit('addMessage', botMessage);
+            } catch (error) {
+                console.error('Ошибка при отправке запроса: ', error);
+            }
+        },
+
+        async sendAMessageVoice({ commit }, message) {
+            try {
+                const response = await axios.post('http://127.0.0.1:8000/uploadFile', { message });
+
+                const userMessage = {
+                    author: 'user',
+                    content: {
+                        audio: message,
+                    },
+                };
+
+                const botMessage = {
+                    author: 'bot',
+                    content: {
+                        text: response.data.response,
+                    },
+                };
+
+                commit('addMessage', userMessage);
+                commit('addMessage', botMessage);
+            } catch (error) {
+                console.error('Ошибка при отправке запроса: ', error);
+            }
+        },
+
+        async sendAMessageFile({ commit }, message) {
+            try {
+                const response = await axios.post('http://127.0.0.1:8000/uploadFile', { message });
+
+                const userMessage = {
+                    author: 'user',
+                    content: {
+                        file: message,
                     },
                 };
 

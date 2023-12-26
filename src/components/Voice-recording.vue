@@ -40,7 +40,7 @@ export default {
           const audioUrl = URL.createObjectURL(audioBlob);
 
           store.dispatch('sendAMessageVoice', audioUrl)
-          store.dispatch('chatHistory');
+          // store.dispatch('chatHistory');
         }
 
         mediaRecorder.start();
