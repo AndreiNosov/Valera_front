@@ -29,7 +29,7 @@ const avatar = ref('');
 const avatarElement = ref(null);
 
 async function loadImageArray() {
-  const context = import.meta.glob('@/assets/ava_v*.jpg');
+  const context = import.meta.glob('@/assets/ava/*');
   const keys = Object.keys(context);
   const files = await Promise.all(keys.map(key => context[key]()));
 
@@ -49,13 +49,7 @@ const handleFileChange = () => {
     reader.onload = (event) => {
       const fileContent = event.target.result;
 
-      const fileInput = {
-        name: file.name,
-        size: file.size,
-        content: fileContent,
-      };
-
-      store.dispatch('sendAMessageFile', fileInput);
+      store.dispatch('sendAMessageFile', fileContent);
       store.dispatch('chatHistory');
     };
 

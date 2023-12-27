@@ -79,14 +79,14 @@ const store = createStore({
             }
         },
 
-        async sendAMessageVoice({ commit }, message) {
+        async sendAMessageVoice({ commit }, audio) {
             try {
-                const response = await axios.post('http://127.0.0.1:8000/uploadFile', { message });
+                const response = await axios.post('http://127.0.0.1:8000/uploadFile', { audio });
 
                 const userMessage = {
                     author: 'user',
                     content: {
-                        audio: message,
+                        audio: audio,
                     },
                 };
 
@@ -104,21 +104,22 @@ const store = createStore({
             }
         },
 
-        async sendAMessageFile({ commit }, message) {
+        async sendAMessageFile({ commit }, file) {
             try {
-                const response = await axios.post('http://127.0.0.1:8000/uploadFile', { message });
+                const response = await axios.post('http://127.0.0.1:8000/uploadFile', file);
 
                 const userMessage = {
                     author: 'user',
                     content: {
-                        file: message,
+                        file: file,
                     },
                 };
 
                 const botMessage = {
                     author: 'bot',
                     content: {
-                        text: response.data.response,
+                        fileName: response.data.response.filename,
+                        fileUrl: response.data.response.file_url,
                     },
                 };
 
