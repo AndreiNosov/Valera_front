@@ -40,35 +40,21 @@ function clearMessages() {
   store.commit('clearMessage');
 }
 
-const handleFileChange = () => {
-  const file = fileInput.value.files[0];
+function handleFileChange() {
+  store.dispatch('sendAMessageFile', fileInput.value.files[0]);
+}
 
-  if (file) {
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      const fileContent = event.target.result;
-
-      store.dispatch('sendAMessageFile', fileContent);
-      store.dispatch('chatHistory');
-    };
-
-    reader.readAsDataURL(file);
-  }
-};
-
-const uploadFile = () => {
+function uploadFile() {
   fileInput.value.click();
-};
+}
 
 onMounted(async () => {
   const avaImagesArray = await loadImageArray();
-
   avatarElement.value = document.querySelector('.ava');
 
   if (avatarElement.value) {
     const avatarSwipeHandler = new Hammer.Manager(avatarElement.value);
-    avatarSwipeHandler.add(new Hammer.Swipe({ direction: Hammer.DIRECTION_HORIZONTAL }));
+    avatarSwipeHandler.add(new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONTAL}));
 
     avatarSwipeHandler.on('swiperight swipeleft', (e) => {
       if (e.type === 'swiperight' && avatarIndex.value < avaImagesArray.length - 1) {
@@ -82,7 +68,7 @@ onMounted(async () => {
       avatar.value = avaImagesArray[avatarIndex.value].default;
     });
 
-    avatarSwipeHandler.get('swipe').set({ enable: true });
+    avatarSwipeHandler.get('swipe').set({enable: true});
   }
 });
 </script>
@@ -96,47 +82,47 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 6px var(--box-shadow-color);
-}
 
-.ava {
-  display: flex;
-  justify-content: center;
-}
+  .ava {
+    display: flex;
+    justify-content: center;
 
-img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 4px solid var(--main-color);
-  box-shadow: 0 4px 6px var(--box-shadow-color);
-  pointer-events: none;
-}
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 4px solid var(--main-color);
+      box-shadow: 0 4px 6px var(--box-shadow-color);
+      pointer-events: none;
+    }
+  }
 
-.file-input {
-  width: 100%;
-}
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 
-.buttons {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-
-  .button {
-    margin: 4px 0;
-    padding: 12px;
-    background: var(--main-color);
-    color: var(--text-color-white);
-    border: 0;
-    border-radius: 16px;
-    font-size: 16px;
-    box-shadow: 0 4px 6px var(--box-shadow-color);
-
-    &:hover {
-      transform: scale(1.01);
+    .file-input {
+      width: 100%;
     }
 
-    &:active {
-      transform: scale(0.99);
+    .button {
+      margin: 4px 0;
+      padding: 12px;
+      background: var(--main-color);
+      color: var(--text-color-white);
+      border: 0;
+      border-radius: 16px;
+      font-size: 16px;
+      box-shadow: 0 4px 6px var(--box-shadow-color);
+
+      &:hover {
+        transform: scale(1.01);
+      }
+
+      &:active {
+        transform: scale(0.99);
+      }
     }
   }
 }

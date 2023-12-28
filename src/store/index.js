@@ -103,23 +103,31 @@ const store = createStore({
                 console.error('Ошибка при отправке запроса: ', error);
             }
         },
+        // uploadfile
 
         async sendAMessageFile({ commit }, file) {
             try {
-                const response = await axios.post('http://127.0.0.1:8000/uploadFile', file);
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const response = await axios.post('http://127.0.0.1:8000/uploadfile', formData, {
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
 
                 const userMessage = {
                     author: 'user',
                     content: {
-                        file: file,
+                        text: 'text',
                     },
                 };
 
                 const botMessage = {
                     author: 'bot',
                     content: {
-                        fileName: response.data.response.filename,
-                        fileUrl: response.data.response.file_url,
+                        file_url: response.data.file_url,
                     },
                 };
 
@@ -129,6 +137,7 @@ const store = createStore({
                 console.error('Ошибка при отправке запроса: ', error);
             }
         },
+
     },
 });
 
